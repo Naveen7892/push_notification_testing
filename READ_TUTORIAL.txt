@@ -10,4 +10,7 @@ try
 >> ionic plugin add phonegap-plugin-push --variable SENDER_ID="GCM_PROJECT_NUMBER"
 (give GCM_PROJECT_NUMBER string as input for now)
 
+>> ionic io init
+(provide ionic username and password, if asked)
 
+>> 
