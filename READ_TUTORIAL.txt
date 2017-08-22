@@ -1,0 +1,13 @@
+>> ionic start push_notification_testing blank
+
+>> cd push_notification_testing
+
+>> ionic add ionic-platform-web-client
+This command has been deprecated.
+try 
+	>>bower install --save-dev ionic-platform-web-client
+
+>> ionic plugin add phonegap-plugin-push --variable SENDER_ID="GCM_PROJECT_NUMBER"
+(give GCM_PROJECT_NUMBER string as input for now)
+
+
