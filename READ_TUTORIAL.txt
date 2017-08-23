@@ -13,4 +13,140 @@ try
 >> ionic io init
 (provide ionic username and password, if asked)
 
->> 
+>> ionic config set dev_push true
+
+---------------
+- Go to 
+https://apps.ionic.io/apps/ 
+(deprecated, need to go PRO version ~rs.2000/month)
+https://dashboard.ionicjs.com/apps
+
+- create project -> settings 
+	-> certificates -> New -> choose Development -> CertificateName1 
+	-> API keys -> New Token -> TokenName1
+	
+	
+to try using CURL,
+
+DEV_DEVICE_TOKEN: The one you copied from your apps log
+PROFILE_NAME: The name of your security profile
+API_TOKEN: The API token you created
+
+curl -X POST -H "Authorization: Bearer API_TOKEN" -H "Content-Type: application/json" -d '{
+    "tokens": ["DEV_DEVICE_TOKEN"],
+    "profile": "PROFILE_NAME",
+    "notification": {
+        "message": "This is my demo push!"
+    }
+}' "https://api.ionic.io/push/notifications"
+
+
+- To create "Profile Certificates" for IOS (requires Apple Developer Account ~rs.6500/year)
+http://docs.ionic.io/services/profiles/#summary
+
+- To create "Keystore and API key" for Android
+
+----------
+ANDROID KEYSTORE: (included in JAVA)
+
+>> keytool -genkey -v -keystore MY-RELEASE-KEY.keystore -alias MY_ALIAS_NAME -keyalg RSA -keysize 2048 -validity 10000
+(Change MY-RELEASE-KEY and MY_ALIAS_NAME to be relevant to your app)
+
+>> keytool -genkey -v -keystore pushnotificationt1.keystore -alias pushnotificationalias1 -keyalg RSA -keysize 2048 -validity 10000
+Enter keystore password:
+Re-enter new password:
+What is your first and last name?
+  [Unknown]:  Naveen Kumar
+What is the name of your organizational unit?
+  [Unknown]:  IMM
+What is the name of your organization?
+  [Unknown]:  IMM
+What is the name of your City or Locality?
+  [Unknown]:  India
+What is the name of your State or Province?
+  [Unknown]:  Tamil Nadu
+What is the two-letter country code for this unit?
+  [Unknown]:  91
+Is CN=Naveen Kumar, OU=IMM, O=IMM, L=India, ST=Tamil Nadu, C=91 correct?
+  [no]:  y
+
+Generating 2,048 bit RSA key pair and self-signed certificate (SHA256withRSA) with a validity of 10,000 days
+        for: CN=Naveen Kumar, OU=IMM, O=IMM, L=India, ST=Tamil Nadu, C=91
+Enter key password for <pushnotificationalias1>
+        (RETURN if same as keystore password):
+[Storing pushnotificationt1.keystore]
+
+ATTACH CREDENTIALS:
+Ionic Dashboard -> settings -> certificates -> Choose the name we created -> Edit -> Android -> upload generated pushnotificationt1.keystore and enter password (same for alias).
+
+ANDROID FCM project and Server key and Sender ID
+https://console.firebase.google.com/?pli=1
+	- Create project -> name and region -> Settings (gear icon) -> Cloud messaging -> Copy Server Key and Sender ID
+	
+Server key:
+AAAAxtFxq5g:APA91bFv7QebjVI0gOvcB_rGyseo1RbEtkZjbRapu1yxUkaZvfI-QxmnP7VSsZhi80RnClQ8K6wyK0jJLJAW0tz5UIG3XWKrkPl9QH1nBR5R8b9h4xy39lX_9fQem3JGqvsI9RcPNCWG
+
+Sender ID:
+853917412248
+
+- Need to attach Server key and Sender ID to security profile.
+
+ATTACH CREDENTIALS:
+Ionic Dashboard -> settings -> certificates -> Choose the name we created -> Edit -> Android -> provide the FCM server key we generated with FCM Cloud messaging tab
+
+SET YOUR PROJECT
+
+>> ionic platform add android
+
+>> ionic plugin rm phonegap-plugin-push
+
+>> ionic plugin add phonegap-plugin-push --variable SENDER_ID="GCM_PROJECT_NUMBER"
+(FCM Sender ID)
+
+>> ionic config set gcm_key <your-gcm-project-number>
+
+		===================CONSOLE OUTPUT=====================
+		D:\Testing\push_notification_testing>ionic platform add android
+		function bold() { [native code] } https://github.com/driftyco/ionic-default-resources/archive/master.zip
+		Adding android project...
+		Creating Cordova project for the Android platform:
+				Path: platforms\android
+				Package: com.ionicframework.pushnotificationtesting628555
+				Name: push_notification_testing
+				Activity: MainActivity
+				Android target: android-25
+		Subproject Path: CordovaLib
+		Android project created with cordova-android@6.1.2
+		Installing "cordova-plugin-console" for android
+		Installing "cordova-plugin-device" for android
+		Installing "cordova-plugin-splashscreen" for android
+		Installing "cordova-plugin-statusbar" for android
+		Installing "cordova-plugin-whitelist" for android
+					   This plugin is only applicable for versions of cordova-android greater than 4.0. If you have a previous platform version, you do
+		Installing "ionic-plugin-keyboard" for android
+		Installing "phonegap-plugin-push" for android
+		Subproject Path: CordovaLib
+		Running command: "C:\Program Files\nodejs\node.exe" D:\Testing\push_notification_testing\hooks\after_prepare\010_add_platform_class.js D:\Testi
+		add to body class: platform-android
+		D:\Testing\push_notification_testing>ionic plugin rm phonegap-plugin-push
+		Uninstalling phonegap-plugin-push from android
+		Subproject Path: CordovaLib
+		Removing "phonegap-plugin-push"
+		D:\Testing\push_notification_testing>ionic plugin add phonegap-plugin-push --variable SENDER_ID="853917412248"
+		Unmet project requirements for latest version of phonegap-plugin-push:
+			cordova-android (6.1.2 in project, >=6.2.1 required)
+			cordova (6.5.0 in project, >=7.0.0 required)
+		Fetching highest version of phonegap-plugin-push that this project supports: 1.10.5 (latest is 2.0.0)
+		Fetching plugin "phonegap-plugin-push@1.10.5" via npm
+		Installing "phonegap-plugin-push" for android
+		Subproject Path: CordovaLib
+		D:\Testing\push_notification_testing>ionic config set gcm_key 853917412248
+		Saved gcm_key, writing to ionic.io.bundle.min.js...
+
+		=======================
+----------------------
+
+
+
+
+
