@@ -19,9 +19,15 @@
       "id": "phonegap-plugin-push",
       "locator": "phonegap-plugin-push",
       "variables": {
-        "SENDER_ID": "GCM-PROJECT-NUMBER"
+        "SENDER_ID": "853917412248"
       }
     }
   ],
-  "cordovaPlatforms": []
+  "cordovaPlatforms": [
+    {
+      "platform": "android",
+      "version": "",
+      "locator": "android"
+    }
+  ]
 }

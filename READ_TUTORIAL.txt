@@ -1,3 +1,5 @@
+===================Working fine===========================
+
 >> ionic start push_notification_testing blank
 
 >> cd push_notification_testing
@@ -26,11 +28,11 @@ https://dashboard.ionicjs.com/apps
 	-> API keys -> New Token -> TokenName1
 	
 	
-to try using CURL,
+to try using CURL, [test after last step, set dev_push to false for real push notification]
 
 DEV_DEVICE_TOKEN: The one you copied from your apps log
-PROFILE_NAME: The name of your security profile
-API_TOKEN: The API token you created
+PROFILE_NAME: The name of your security profile from ionic dashboard
+API_TOKEN: The API token you created from ionic dashboard
 
 curl -X POST -H "Authorization: Bearer API_TOKEN" -H "Content-Type: application/json" -d '{
     "tokens": ["DEV_DEVICE_TOKEN"],
@@ -104,6 +106,7 @@ SET YOUR PROJECT
 (FCM Sender ID)
 
 >> ionic config set gcm_key <your-gcm-project-number>
+(FCM Sender ID)
 
 		===================CONSOLE OUTPUT=====================
 		D:\Testing\push_notification_testing>ionic platform add android
@@ -145,6 +148,9 @@ SET YOUR PROJECT
 
 		=======================
 ----------------------
+Set DEV PUSH to false to use real push notifications
+>> ionic config set dev_push false
+
 
 
 
