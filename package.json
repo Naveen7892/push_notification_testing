@@ -21,7 +21,8 @@
       "variables": {
         "SENDER_ID": "853917412248"
       }
-    }
+    },
+    "onesignal-cordova-plugin"
   ],
   "cordovaPlatforms": [
     {

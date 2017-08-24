@@ -6,6 +6,8 @@
 angular.module('starter', ['ionic'])
 
 .run(function($ionicPlatform) {
+
+  // Push notification using Ionic push service
   ionic.Platform.ready(function() {
     var push = new Ionic.Push({
       "debug": true
@@ -19,7 +21,7 @@ angular.module('starter', ['ionic'])
     });
   });
 
-  // Push notification using OneSignal
+  // Push notification using OneSignal push service
   ionic.Platform.ready(function() {
     // Enable to debug issues.
     // window.plugins.OneSignal.setLogLevel({logLevel: 4, visualLevel: 4});
