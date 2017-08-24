@@ -1,0 +1,29 @@
+OneSignal service
+
+- signup with https://onesignal.com/
+- create project - choose platform - provide fcm key and sender id - choose language - get api key
+
+API Key: 1963cb3b-f80f-4bc5-b202-3b1d25c34b02
+
+
+Test with POSTMAN:
+
+method:
+POST
+
+URL:
+https://onesignal.com/api/v1/notifications
+
+headers:
+[{"key":"Content-Type","value":"application/json","description":""}]
+[{"key":"Authorization","value":"Basic YzE4NjU1NDYtYzQ0MS00NjcwLThiMzAtYzMwNTg0ZDJhNmVi","description":""}]
+
+Body - raw - JSON:
+{
+	"app_id": "1963cb3b-f80f-4bc5-b202-3b1d25c34b02",
+    "contents": {
+    	"en": "Testing OneSignal push service"
+    },
+    "included_segments": ["All Users"]
+}
+

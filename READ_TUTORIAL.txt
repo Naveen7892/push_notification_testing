@@ -152,7 +152,24 @@ Set DEV PUSH to false to use real push notifications
 >> ionic config set dev_push false
 
 
+TEST with POSTMAN
 
+method:
+POST
 
+URL:
+https://api.ionic.io/push/notifications
 
+headers:
+[{"key":"Content-Type","value":"application/json","description":""}]
+[{"key":"Authorization","value":"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkNDhjZWNjNy04NjVlLTRhZjItYmNhMy1iNTNlMDgyNmY1YTUifQ.H3yeAKiBIsRRDX1o96UMi0sOOPb-9TAZo9Ngaqhq9yk","description":""}]
+
+Body - raw - JSON:
+{
+  "tokens": ["fz2lsqg-ngU:APA91bFIquQfCdPlJaOGJ-2nwMuJRWTqq8tTNJ3wyfVgIZ4c0ISHJ3V2C_j424QoCS9UaQFPEqBpzDf8U2pz4REKCOYM941pKxbPHwPjG9lPbelwEWOM0TVm5ZOpdgtNfqE4nFLUHRY5"],
+  "profile": "test2",
+  "notification": {
+        "message": "Hello, Good morning!"
+    }
+}
 
